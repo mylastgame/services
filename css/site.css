@@ -1,0 +1,39 @@
+#page_wrap { 
+   margin-top: 40px;
+}
+
+.margin_bottom{
+   margin-bottom: 10px;
+}
+
+.margin_top{
+   margin-bottom: 10px;
+}
+
+.divider{
+   height: 10px;
+}
+
+.inline{
+   display: inline;
+}
+
+.inline-block{
+   display: inline-block;
+}
+
+.valign-middle{
+   vertical-align: middle;
+}
+
+.link{
+   cursor: pointer;
+}
+
+.margin0{
+   margin: 0;
+}
+
+.big{
+   font-size: 150%;
+}

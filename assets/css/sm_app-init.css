@@ -1,0 +1,24 @@
+#sm_app-button{   
+   background-color: #eac102;   
+   background-image: url('http://services/images/sm_app-folder-button1.png');  
+   background-repeat: no-repeat;
+   background-position: left 2px center;
+   width: 25px;
+   height: 120px;
+   position: fixed;
+   right: 0;
+   top: 240px;
+   font-size: 14px;
+   padding: 0px;
+   z-index: 999;
+   -moz-border-radius-left: 20px;
+   -moz-border-radius-bottomleft: 20px;   
+   border-top-left-radius: 20px;
+   border-bottom-left-radius: 20px;
+}
+
+#sm_app-button:hover{   
+   padding-right: 7px;
+   cursor: pointer;   
+}
+

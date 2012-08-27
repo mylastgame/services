@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name='maintenanceParts'
+  targetNamespace='http://services/maintenanceParts'
+  xmlns:tns=' http://services/maintenanceParts'
+  xmlns:soap='http://schemas.xmlsoap.org/wsdl/soap/'
+  xmlns:xsd='http://www.w3.org/2001/XMLSchema'
+  xmlns:soapenc='http://schemas.xmlsoap.org/soap/encoding/'
+  xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/'
+  xmlns='http://schemas.xmlsoap.org/wsdl/'>
+
+   
+<wsdl:types>
+   <xsd:complexType name="CarMarkArray">
+      <xsd:complexContent>
+         <xsd:restriction base="soap-enc:Array">
+            <xsd:attribute wsdl:arrayType="tns:CarMark[]" ref="soap-enc:arrayType"/>
+         </xsd:restriction>
+      </xsd:complexContent>
+   </xsd:complexType>
+   <xsd:complexType name="CarMark">
+      <xsd:all>         
+         <xsd:element name="id" type="xsd:integer"/>         
+         <xsd:element name="name" type="xsd:string"/>
+         <xsd:element name="image" type="xsd:string"/>         
+      </xsd:all>
+   </xsd:complexType>
+   <xsd:complexType name="CarModelArray">
+      <xsd:complexContent>
+         <xsd:restriction base="soap-enc:Array">
+            <xsd:attribute wsdl:arrayType="tns:CarModel[]" ref="soap-enc:arrayType"/>
+         </xsd:restriction>
+      </xsd:complexContent>
+   </xsd:complexType>
+   <xsd:complexType name="CarModel">
+      <xsd:all>         
+         <xsd:element name="id" type="xsd:integer"/>         
+         <xsd:element name="name" type="xsd:string"/>         
+         <xsd:element name="mark_id" type="xsd:integer"/>         
+      </xsd:all>
+   </xsd:complexType>
+   <xsd:complexType name="CarModArray">
+      <xsd:complexContent>
+         <xsd:restriction base="soap-enc:Array">
+            <xsd:attribute wsdl:arrayType="tns:CarMod[]" ref="soap-enc:arrayType"/>
+         </xsd:restriction>
+      </xsd:complexContent>
+   </xsd:complexType>
+   <xsd:complexType name="CarMod">
+      <xsd:all>         
+         <xsd:element name="id" type="xsd:integer"/>         
+         <xsd:element name="name" type="xsd:string"/>
+         <xsd:element name="model_id" type="xsd:integer"/>         
+      </xsd:all>
+   </xsd:complexType>
+   <xsd:complexType name="CarMaintenance">
+      <xsd:all>         
+         <xsd:element name="id" type="xsd:integer"/>                  
+         <xsd:element name="maintenance_interval" type="xsd:integer"/>         
+         <xsd:element name="number" type="xsd:integer"/>   
+         <xsd:element name="mark_id" type="xsd:integer"/>   
+         <xsd:element name="model_id" type="xsd:integer"/>   
+         <xsd:element name="mod_id" type="xsd:integer"/>   
+      </xsd:all>
+   </xsd:complexType>
+   <xsd:complexType name="CarPartArray">
+      <xsd:complexContent>
+         <xsd:restriction base="soap-enc:Array">
+            <xsd:attribute wsdl:arrayType="tns:CarPart[]" ref="soap-enc:arrayType"/>
+         </xsd:restriction>
+      </xsd:complexContent>
+   </xsd:complexType>
+   <xsd:complexType name="CarPart">
+      <xsd:all>                     
+         <xsd:element name="name" type="xsd:string"/>
+         <xsd:element name="article" type="xsd:string"/>
+         <xsd:element name="comment" type="xsd:string"/>
+         <xsd:element name="amount" type="xsd:integer"/>
+      </xsd:all>
+   </xsd:complexType>
+</wsdl:types>  
+
+<message name='getMarksRequest'/>  
+<message name='getMarksResponse'>
+  <part name='Result' type='tns:CarMarkArray'/>
+</message>
+
+<message name='getMarkRequest'>  
+   <part name='mark_id' type='xsd:integer'/>
+</message>
+<message name='getMarkResponse'>
+  <part name='Result' type='tns:CarMark'/>
+</message>
+
+<message name='getModelsRequest'>  
+   <part name='mark_id' type='xsd:integer'/>
+</message>
+<message name='getModelsResponse'>
+  <part name='Result' type='tns:CarModelArray'/>
+</message>
+
+<message name='getModelRequest'>  
+   <part name='model_id' type='xsd:integer'/>
+</message>
+<message name='getModelResponse'>
+  <part name='Result' type='tns:CarModel'/>
+</message>
+
+<message name='getModsRequest'>  
+   <part name='model_id' type='xsd:integer'/>
+</message>
+<message name='getModsResponse'>
+  <part name='Result' type='tns:CarModsArray'/>
+</message>
+
+<message name='getModRequest'>  
+   <part name='mod_id' type='xsd:integer'/>
+</message>
+<message name='getModResponse'>
+  <part name='Result' type='tns:CarMod'/>
+</message>
+
+<message name='getMaintenanceRequest'>  
+   <part name='maintenance_id' type='xsd:integer'/>
+</message>
+<message name='getMaintenanceResponse'>
+  <part name='Result' type='tns:CarMaintenance'/>
+</message>
+
+<message name='getPartsRequest'>  
+   <part name='maintenance_id' type='xsd:integer'/>   
+   <part name='order' type='xsd:string'/>  
+</message>
+<message name='getPartsResponse'>
+  <part name='Result' type='tns:CarPartArray'/>
+</message>
+
+
+<portType name='maintenancePartsPortType'>
+  <operation name='getMarks'>
+    <input message='tns:getMarksRequest'/>
+    <output message='tns:getMarksResponse'/>
+  </operation>
+  
+  <operation name='getMark'>
+    <input message='tns:getMarkRequest'/>
+    <output message='tns:getMarkResponse'/>
+  </operation>
+  
+  <operation name='getModels'>
+    <input message='tns:getModelsRequest'/>
+    <output message='tns:getModelsResponse'/>
+  </operation>
+  
+  <operation name='getModel'>
+    <input message='tns:getModelRequest'/>
+    <output message='tns:getModelResponse'/>
+  </operation>
+  
+  <operation name='getMods'>
+    <input message='tns:getModsRequest'/>
+    <output message='tns:getModsResponse'/>
+  </operation>
+  
+  <operation name='getMod'>
+    <input message='tns:getModRequest'/>
+    <output message='tns:getModResponse'/>
+  </operation>
+  
+  <operation name='getMaintenance'>
+    <input message='tns:getMaintenanceRequest'/>
+    <output message='tns:getMaintenanceResponse'/>
+  </operation>
+  
+  <operation name='getParts'>
+    <input message='tns:getPartsRequest'/>
+    <output message='tns:getPartsResponse'/>
+  </operation>
+</portType>
+
+<binding name='maintenancePartsBinding' type='tns:maintenancePartsPortType'>
+  <soap:binding style='rpc'
+    transport='http://schemas.xmlsoap.org/soap/http'/>
+  <operation name='getMarks'>
+    <soap:operation soapAction='urn:xmethods-delayed-quotes#getMarks'/>
+    <input>
+      <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+    </input>
+    <output>
+      <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+    </output>
+  </operation>
+  
+  <operation name='getMark'>
+    <soap:operation soapAction='urn:xmethods-delayed-quotes#getMark'/>
+    <input>
+      <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+    </input>
+    <output>
+      <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+    </output>
+  </operation>
+  
+  <operation name='getModels'>
+    <soap:operation soapAction='urn:xmethods-delayed-quotes#getModels'/>
+    <input>
+      <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+    </input>
+    <output>
+      <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+    </output>
+  </operation>
+  
+  <operation name='getModel'>
+    <soap:operation soapAction='urn:xmethods-delayed-quotes#getModel'/>
+    <input>
+      <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+    </input>
+    <output>
+      <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+    </output>
+  </operation>
+  
+  <operation name='getMods'>     
+    <soap:operation soapAction='urn:xmethods-delayed-quotes#getMods'/>
+    <input>
+      <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+    </input>
+    <output>
+      <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+    </output>
+  </operation>
+  
+  <operation name='getMod'>
+    <soap:operation soapAction='urn:xmethods-delayed-quotes#getMod'/>
+    <input>
+      <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+    </input>
+    <output>
+      <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+    </output>
+  </operation>
+  
+  <operation name='getMaintenance'>
+    <soap:operation soapAction='urn:xmethods-delayed-quotes#getMaintenance'/>
+    <input>
+      <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+    </input>
+    <output>
+      <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+    </output>
+  </operation>
+  
+  <operation name='getParts'>
+    <soap:operation soapAction='urn:xmethods-delayed-quotes#getParts'/>
+    <input>
+      <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+    </input>
+    <output>
+      <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+    </output>
+  </operation>
+</binding>
+
+<service name='maintenancePartsService'>
+  <port name='maintenancePartsPort' binding='maintenancePartsBinding'>
+    <soap:address location='http://services/soap/maintenanceParts'/>
+  </port>
+</service>
+</definitions>
+
